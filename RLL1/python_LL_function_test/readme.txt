@@ -1,0 +1,3 @@
+为什么没有在userin.py中加入输出gate list的function呢
+那是因为这个文件不光是要给所有LL用的不光是RLL所以生成gate
+的机制不一样，所以那个函数就不放在userin.py文件里面了
