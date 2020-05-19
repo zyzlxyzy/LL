@@ -307,6 +307,57 @@ def write_gate(filename2, gate_list):
 
 
 
+######################################################################
+def read_gate(filename, ln):
+    gate_symbol = []
+    gate_data = []
+    gate_temp = []
+    gate_no = 0
+    with open(filename, 'r') as f:
+        for i, line in enumerate(f):
+            line_ele = re.split('\W+', line)
+            if i<ln:
+                pass 
+            elif re.match('^endmodule', line):
+                print('read over')
+                break
+            elif re.match('^[a-zA-Z]', line):
+                '''if i<3000 and i >2950:
+                    print(line_ele)
+                else:
+                    pass'''
+                gate_temp1 = []
+                gate_symbol.append(line)
+                for ele in line_ele:
+                    if ele == '':
+                        pass
+                    else:
+                        gate_temp.append(ele)
+                        #if i<3000 and i>2950:
+                        #    print(str(gate_temp))
+                        #else:
+                        #    pass
+                #print(gate_temp)
+                gate_temp1.append(gate_temp[0])
+                gate_temp1.append(gate_temp[1])
+                gate_temp1.append(gate_temp[2])#output
+                gate_temp1.append([])
+                for g1 in range(3, len(gate_temp)):
+                    gate_temp1[3].append(gate_temp[g1])
+                gate_data.append(gate_temp1)
+                gate_no+=1
+                gate_temp = []
+    return gate_no, gate_symbol, gate_data
+#######################################################################
+###生成两个list，gate_symbol的每个元素直接就是gate那一行
+###gate_data的每个元素也是一个list，第0个元素为gate类型
+###第1个为gate名，第2个元素为output，第3个元素为一个list，input list
+
+###gate_symbol的每个元素是自带一个\n的，因为是直接提取的line
+
+
+
+
 
 
 '''
@@ -347,6 +398,20 @@ print(r2)
 
 r3, ii3 = modi_wire(user_in[0], user_in[3], keyname, r2)
 print(r3)
+
+gate_no, gate_symbol, gate_data = read_gate(user_in[0], r3)
+print(gate_no)
+
+with open('gate1.txt', 'w+') as ff1:
+    for gg1 in gate_symbol:
+        ff1.write(str(gg1))
+
+with open('gate2.txt', 'w+') as ff2:
+    for gg2 in gate_data:
+        ff2.write(str(gg2)+'\n')
+
+
+
 
 write_gate(user_in[3], gatelist)
 
