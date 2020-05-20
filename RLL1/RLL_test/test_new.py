@@ -12,6 +12,7 @@ def read_user(filename):
         user_in[2] = list((str(f.readline()).strip('\n')))
         user_in[3] = (str(f.readline())).strip('\n')
         user_in[4] = (str(f.readline())).strip('\n')
+        user_in[5] = (str(f.readline())).strip('\n')
 
     if len(user_in[2]) == user_in[1]:
         print('length fit')
